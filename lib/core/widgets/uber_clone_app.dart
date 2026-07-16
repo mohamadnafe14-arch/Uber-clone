@@ -9,6 +9,7 @@ class UberCloneApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
+      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black),
     );
   }
 }

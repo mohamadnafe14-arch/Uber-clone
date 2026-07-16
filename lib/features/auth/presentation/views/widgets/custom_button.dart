@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key, required this.text, required this.onClicked});
+  final String text;
+  final VoidCallback onClicked;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onClicked,
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size.fromHeight(50),
+        backgroundColor: Color(0xff4F46E5),
+      ),
+      child: Text(text, style: const TextStyle(color: Colors.white)),
+    );
+  }
+}
