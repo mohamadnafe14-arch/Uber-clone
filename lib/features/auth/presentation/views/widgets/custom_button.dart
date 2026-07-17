@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     required this.isLoading,
   });
   final String text;
-  final VoidCallback onClicked;
+  final void Function()? onClicked;
   final bool isLoading;
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size.fromHeight(50),
         backgroundColor: customButtonColor,
+        disabledBackgroundColor: customButtonColor,
       ),
       child: isLoading
           ? const CircularProgressIndicator()

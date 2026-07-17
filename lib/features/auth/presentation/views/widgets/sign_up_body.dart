@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uber_clone/core/functions/show_snack_bar.dart';
 import 'package:uber_clone/core/utils/app_router.dart';
+import 'package:uber_clone/features/auth/presentation/manager/bloc/auth_bloc.dart';
 import 'package:uber_clone/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:uber_clone/features/auth/presentation/views/widgets/custom_text_button.dart';
 import 'package:uber_clone/features/auth/presentation/views/widgets/custom_text_form_field.dart';
@@ -112,12 +115,34 @@ class _SignUpBodyState extends State<SignUpBody> {
                 },
               ),
               SizedBox(height: 20),
-              CustomButton(
-                text: "Sign up",
-                onClicked: () {
-                  if (_formKey.currentState!.validate()) {}
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    context.go(AppRouter.homeRoute);
+                  } else if (state is AuthError) {
+                    showSnackBar(context, state.message);
+                  }
                 },
-                isLoading: false,
+                builder: (context, state) {
+                  return CustomButton(
+                    text: "Sign up",
+                    onClicked: state is AuthLoading
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthBloc>().add(
+                                SignUpEvent(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                  name: _nameController.text,
+                                  phone: _phoneController.text,
+                                ),
+                              );
+                            }
+                          },
+                    isLoading: state is AuthLoading,
+                  );
+                },
               ),
               SizedBox(height: 20),
               CustomTextButton(

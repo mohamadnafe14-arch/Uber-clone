@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uber_clone/features/auth/presentation/views/widgets/sign_up_body.dart';
 
-class SignUpView extends StatefulWidget {
-  const SignUpView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _HomeViewState extends State<HomeView> {
   DateTime? _lastBackPressed;
 
   @override
@@ -37,7 +36,10 @@ class _SignUpViewState extends State<SignUpView> {
           SystemNavigator.pop();
         }
       },
-      child: const Scaffold(body: SignUpBody()),
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Home")),
+        body: const Center(child: Text("Home")),
+      ),
     );
   }
 }
