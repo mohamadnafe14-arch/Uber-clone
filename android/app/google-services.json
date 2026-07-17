@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "152777030874",
+    "project_id": "login-9a6ed",
+    "storage_bucket": "login-9a6ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152777030874:android:73c40901bb4081f562b9e3",
+        "android_client_info": {
+          "package_name": "com.example.login_and_register_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBV-Mf-0WeD5lR1PMDG4hfqHZt15LwKmFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152777030874:android:73fab5c71b44afaf62b9e3",
+        "android_client_info": {
+          "package_name": "com.example.uber_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBV-Mf-0WeD5lR1PMDG4hfqHZt15LwKmFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
