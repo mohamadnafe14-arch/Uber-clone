@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:uber_clone/core/constants/colors_consts.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text, required this.onClicked});
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.onClicked,
+    required this.isLoading,
+  });
   final String text;
   final VoidCallback onClicked;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -13,7 +19,9 @@ class CustomButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(50),
         backgroundColor: customButtonColor,
       ),
-      child: Text(text, style: const TextStyle(color: Colors.white)),
+      child: isLoading
+          ? const CircularProgressIndicator()
+          : Text(text, style: const TextStyle(color: Colors.white)),
     );
   }
 }

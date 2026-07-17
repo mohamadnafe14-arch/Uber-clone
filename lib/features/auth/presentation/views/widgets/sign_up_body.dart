@@ -15,7 +15,8 @@ class SignUpBody extends StatefulWidget {
 class _SignUpBodyState extends State<SignUpBody> {
   late TextEditingController _emailController,
       _passwordController,
-      _nameController;
+      _nameController,
+      _phoneController;
   late GlobalKey<FormState> _formKey;
   @override
   initState() {
@@ -23,6 +24,7 @@ class _SignUpBodyState extends State<SignUpBody> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _nameController = TextEditingController();
+    _phoneController = TextEditingController();
     _formKey = GlobalKey<FormState>();
   }
 
@@ -32,6 +34,7 @@ class _SignUpBodyState extends State<SignUpBody> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _phoneController.dispose();
     _formKey.currentState?.dispose();
   }
 
@@ -68,12 +71,30 @@ class _SignUpBodyState extends State<SignUpBody> {
               ),
               SizedBox(height: 20),
               CustomTextFormField(
+                hintText: "Phone",
+                controller: _phoneController,
+                obscureText: false,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter your phone";
+                  }
+                  if (!RegExp(
+                    r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$',
+                  ).hasMatch(value)) {
+                    return "Please enter a valid phone number";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextFormField(
                 hintText: "Email",
                 controller: _emailController,
                 obscureText: false,
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Please enter your email";
+                  if (!RegExp(
+                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                  ).hasMatch(value!)) {
+                    return "Please enter a valid email";
                   }
                   return null;
                 },
@@ -96,6 +117,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                 onClicked: () {
                   if (_formKey.currentState!.validate()) {}
                 },
+                isLoading: false,
               ),
               SizedBox(height: 20),
               CustomTextButton(

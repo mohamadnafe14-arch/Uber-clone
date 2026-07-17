@@ -80,6 +80,7 @@ class _SignInBodyState extends State<SignInBody> {
                 onClicked: () {
                   if (_formKey.currentState!.validate()) {}
                 },
+                isLoading: false,
               ),
               SizedBox(height: 20),
               CustomTextButton(
