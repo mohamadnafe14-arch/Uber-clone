@@ -72,4 +72,16 @@ class AuthRepoImple implements AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await remoteAuthDataSource.signOut();
+      return const Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(e.message!));
+    } catch (e) {
+      return Left(AppFailure(e.toString()));
+    }
+  }
 }

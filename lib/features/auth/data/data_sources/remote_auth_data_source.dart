@@ -15,6 +15,8 @@ abstract class RemoteAuthDataSource {
     required String phone,
   });
   Future<UserModel> signIn({required String email, required String password});
+
+  Future<void> signOut();
 }
 
 class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
@@ -92,6 +94,19 @@ class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
     } on FirebaseException catch (e) {
       log(e.message.toString());
       throw FirebaseFirestoreExceptionMapper.map(e);
+    } catch (e) {
+      log(e.toString());
+      throw AppException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await firebaseAuth.signOut();
+    } on FirebaseAuthException catch (e) {
+      log(e.message.toString());
+      throw FirebaseAuthExceptionMapper.map(e);
     } catch (e) {
       log(e.toString());
       throw AppException(e.toString());

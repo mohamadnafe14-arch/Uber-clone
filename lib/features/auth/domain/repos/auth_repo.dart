@@ -13,4 +13,5 @@ abstract interface class AuthRepo {
     required String name,
     required String phone,
   });
+  Future<Either<Failure, void>> signOut();
 }

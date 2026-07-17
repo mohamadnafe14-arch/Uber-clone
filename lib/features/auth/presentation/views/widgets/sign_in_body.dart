@@ -84,6 +84,11 @@ class _SignInBodyState extends State<SignInBody> {
                     context.go(AppRouter.homeRoute);
                   } else if (state is AuthError) {
                     showSnackBar(context, state.message);
+                  } else if (state is AuthSignedOut) {
+                    showSnackBar(
+                      context,
+                      "You are blocked by admin please contact admin",
+                    );
                   }
                 },
                 builder: (context, state) {

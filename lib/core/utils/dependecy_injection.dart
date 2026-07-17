@@ -7,6 +7,7 @@ import 'package:uber_clone/features/auth/data/data_sources/remote_auth_data_sour
 import 'package:uber_clone/features/auth/data/repos/auth_repo_imple.dart';
 import 'package:uber_clone/features/auth/domain/repos/auth_repo.dart';
 import 'package:uber_clone/features/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:uber_clone/features/auth/domain/use_cases/sign_out_use_case.dart';
 import 'package:uber_clone/features/auth/domain/use_cases/sign_up_use_case.dart';
 import 'package:uber_clone/features/auth/presentation/manager/bloc/auth_bloc.dart';
 import 'package:uber_clone/firebase_options.dart';
@@ -35,10 +36,12 @@ Future<void> initDependecyInjection() async {
   );
   serviceLocator.registerLazySingleton(() => SignInUseCase(serviceLocator()));
   serviceLocator.registerLazySingleton(() => SignUpUseCase(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SignOutUseCase(serviceLocator()));
   serviceLocator.registerFactory(
     () => AuthBloc(
       signInUseCase: serviceLocator(),
       signUpUseCase: serviceLocator(),
+      signOutUseCase: serviceLocator(),
     ),
   );
 }
