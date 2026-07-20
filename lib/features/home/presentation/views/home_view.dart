@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uber_clone/features/home/presentation/manager/current_location_bloc/current_location_bloc.dart';
 import 'package:uber_clone/features/home/presentation/views/widgets/home_body.dart';
+import 'package:uber_clone/main.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -37,9 +40,12 @@ class _HomeViewState extends State<HomeView> {
           SystemNavigator.pop();
         }
       },
-      child: Scaffold(
-        appBar: AppBar(title: const Text("Home")),
-        body: HomeBody(),
+      child: BlocProvider(
+        create: (context) => serviceLocator<CurrentLocationBloc>(),
+        child: Scaffold(
+          appBar: AppBar(title: const Text("Home")),
+          body: HomeBody(),
+        ),
       ),
     );
   }
