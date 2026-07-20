@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -38,7 +40,18 @@ class _HomeViewState extends State<HomeView> {
       },
       child: Scaffold(
         appBar: AppBar(title: const Text("Home")),
-        body: const Center(child: Text("Home")),
+        body: FlutterMap(
+          options: const MapOptions(
+            initialCenter: LatLng(30.0444, 31.2357), // القاهرة
+            initialZoom: 13,
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+              userAgentPackageName: 'com.example.uber_clone',
+            ),
+          ],
+        ),
       ),
     );
   }
