@@ -53,31 +53,73 @@ class _HomeBodyState extends State<HomeBody> {
             state.userLocationEntity.longitude,
           );
         }
-
-        return FlutterMap(
-          mapController: mapController,
-          options: MapOptions(initialCenter: currentLocation, initialZoom: 16),
+        return Stack(
           children: [
-            TileLayer(
-              urlTemplate:
-                  'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-              subdomains: const ['a', 'b', 'c', 'd'],
-              userAgentPackageName: 'com.example.uber_clone',
-            ),
-
-            MarkerLayer(
-              markers: [
-                Marker(
-                  point: currentLocation,
-                  width: 50,
-                  height: 50,
-                  child: const Icon(
-                    Icons.my_location,
-                    color: Colors.blue,
-                    size: 40,
-                  ),
+            FlutterMap(
+              mapController: mapController,
+              options: MapOptions(
+                initialCenter: currentLocation,
+                initialZoom: 16,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate:
+                      'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+                  subdomains: const ['a', 'b', 'c', 'd'],
+                  userAgentPackageName: 'com.example.uber_clone',
+                ),
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: currentLocation,
+                      width: 50,
+                      height: 50,
+                      child: const Icon(
+                        Icons.my_location,
+                        color: Colors.blue,
+                        size: 40,
+                      ),
+                    ),
+                  ],
                 ),
               ],
+            ),
+            Positioned(
+              top: 60,
+              left: 16,
+              right: 16,
+              child: Material(
+                elevation: 6,
+                borderRadius: BorderRadius.circular(16),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(16),
+                  onTap: () {},
+                  child: Container(
+                    height: 55,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(width: 12),
+                        Text("Where to?", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 30,
+              right: 16,
+              child: FloatingActionButton.small(
+                heroTag: "location",
+                onPressed: () {
+                  context.read<CurrentLocationBloc>().add(
+                    GetCurrentLocationEvent(),
+                  );
+                },
+                child: const Icon(Icons.my_location),
+              ),
             ),
           ],
         );
