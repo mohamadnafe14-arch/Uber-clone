@@ -114,7 +114,7 @@ class _SignInBodyState extends State<SignInBody> {
               CustomTextButton(
                 text: "If you don't have an account? Sign up",
                 onClicked: () {
-                  context.push(AppRouter.initialRoute);
+                  context.push(AppRouter.signUpRoute);
                 },
               ),
             ],
