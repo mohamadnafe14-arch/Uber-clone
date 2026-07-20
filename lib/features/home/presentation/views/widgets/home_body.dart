@@ -74,10 +74,20 @@ class _HomeBodyState extends State<HomeBody> {
                       point: currentLocation,
                       width: 50,
                       height: 50,
-                      child: const Icon(
-                        Icons.my_location,
-                        color: Colors.blue,
-                        size: 40,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 4),
+                          boxShadow: const [
+                            BoxShadow(blurRadius: 15, color: Colors.black26),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.navigation,
+                          color: Colors.white,
+                          size: 24,
+                        ),
                       ),
                     ),
                   ],
